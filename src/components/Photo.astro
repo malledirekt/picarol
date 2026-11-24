@@ -1,0 +1,23 @@
+---
+// Bildplatz. Sobald ein Foto da ist: src setzen, dann erscheint das Bild statt des Platzhalters.
+interface Props {
+	label: string;
+	src?: string;
+	alt?: string;
+	shape?: 'bogen' | 'eckig';
+	class?: string;
+}
+const { label, src, alt = '', shape = 'eckig', class: className } = Astro.props;
+---
+
+<figure class:list={['photo', `photo--${shape}`, className]}>
+	{
+		src ? (
+			<img src={src} alt={alt} loading="lazy" />
+		) : (
+			<div class="photo__slot" role="img" aria-label={`Platz für Foto: ${label}`}>
+				<span>Foto: {label}</span>
+			</div>
+		)
+	}
+</figure>

@@ -1,0 +1,21 @@
+---
+// Das El-Picarol-Logo (aus der Vektordatei). teil="glocke" zeigt nur die Glocke.
+interface Props {
+	teil?: 'ganz' | 'glocke';
+	class?: string;
+	label?: string;
+}
+const { teil = 'ganz', class: className, label } = Astro.props;
+const viewBox = teil === 'glocke' ? '620 158 136 150' : '159 156 1058 445';
+---
+
+<svg
+	class={className}
+	viewBox={viewBox}
+	role={label ? 'img' : undefined}
+	aria-label={label}
+	aria-hidden={label ? undefined : 'true'}
+	focusable="false"
+>
+	<use href="#lp"></use>
+</svg>

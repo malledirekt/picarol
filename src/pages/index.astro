@@ -1,11 +1,386 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Kontaktdaten: hier eintragen, dann erscheinen sie auf der Seite.
+// Solange ein Wert leer ist (''), steht dort „wird ergänzt“.
+const kontakt = {
+	adresse: '',
+	telefon: '',
+	email: '',
+	oeffnungszeiten: '',
+};
+
+const telLink = kontakt.telefon ? `tel:${kontakt.telefon.replace(/[^+\d]/g, '')}` : '';
+const reservieren = telLink || '#besuch';
+
+const laufband = ['Dienstag ist Hähnchentag', 'Freitag oder Samstag BBQ', 'Jede Woche eine neue Karte', 'Deutsch und mallorquinisch'];
+
+const galerie = [
+	{ src: '/bilder/garten-tag.webp', alt: 'Tische im Garten vor dem Haus, in der Mitte ein Brunnen', b: 1800, h: 1005, text: 'Der Garten am Mittag' },
+	{ src: '/bilder/terrasse-mittag.webp', alt: 'Gedeckter Tisch auf der überdachten Terrasse mit Blick auf Palmen', b: 1100, h: 1366, text: 'Die Terrasse' },
+	{ src: '/bilder/gastraum.webp', alt: 'Gäste im hellen Gastraum', b: 1600, h: 893, text: 'Drinnen' },
+	{ src: '/bilder/terrasse-abend.webp', alt: 'Gäste beim Abendessen auf der Terrasse unter Korblampen', b: 1100, h: 1366, text: 'Wenn es dunkel wird' },
+	{ src: '/bilder/garten-abend.webp', alt: 'Das beleuchtete Haus mit Garten am Abend', b: 2200, h: 1228, text: 'Der Garten am Abend' },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="El Picarol · Bar Restaurant in Búger, Mallorca"
+	description="Deutsche und mallorquinische Küche in einem traditionellen Haus mit Garten in Búger, Mallorca. Jede Woche neue Karte, dienstags Hähnchentag, am Wochenende BBQ."
+>
+	<header class="kopf" data-kopf>
+		<div class="kopf__innen">
+			<nav class="kopf__nav kopf__nav--links" aria-label="Hauptnavigation">
+				<a href="#kueche">Küche</a>
+				<a href="#tage">Feste Tage</a>
+				<a href="#haus">Haus und Garten</a>
+			</nav>
+			<a class="kopf__logo" href="#top" aria-label="El Picarol, zum Seitenanfang">
+				<Logo />
+			</a>
+			<nav class="kopf__nav kopf__nav--rechts" aria-label="Weitere Navigation">
+				<a href="#geschichte">Geschichte</a>
+				<a href="#besuch">Besuch</a>
+				<a class="knopf knopf--kopf" href={reservieren}>Reservieren</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="top">
+		<!-- Auftakt -->
+		<section class="auftakt" data-auftakt>
+			<div class="auftakt__bild">
+				<img
+					src="/bilder/hero.webp"
+					alt="Geschmortes Fleisch mit Kartoffeln und Rosmarin auf einem blau-weißen Keramikteller"
+					width="2400"
+					height="1340"
+					fetchpriority="high"
+				/>
+			</div>
+			<div class="auftakt__text">
+				<p class="auftakt__ort">Bar Restaurant in Búger, Mallorca</p>
+				<h1>
+					<span class="zeile"><span>Gut essen</span></span>
+					<span class="zeile"><span>Lange bleiben</span></span>
+				</h1>
+				<p class="auftakt__lead">
+					Deutsche und mallorquinische Küche in einem traditionellen Haus mit Garten. Die Karte wechselt
+					jede Woche.
+				</p>
+				<div class="auftakt__knoepfe">
+					<a class="knopf knopf--hell" href={reservieren}>Tisch reservieren</a>
+					<a class="textlink" href="#kueche">Zur Küche</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Laufband -->
+		<div class="laufband" aria-hidden="true">
+			<div class="laufband__spur">
+				{
+					[0, 1, 2].map(() =>
+						laufband.map((t) => (
+							<span>
+								{t}
+								<Logo teil="glocke" />
+							</span>
+						)),
+					)
+				}
+			</div>
+		</div>
+
+		<!-- Küche -->
+		<section class="kueche" id="kueche">
+			<div class="wrap kueche__raster">
+				<div class="kueche__text">
+					<h2 data-zeigen>Zwei Küchen an einem Tisch</h2>
+					<p data-zeigen style="--v: 0.1s">
+						Bei uns steht deutsche Küche neben mallorquinischer. Geschmortes, das Zeit hatte, Fisch und
+						Meeresfrüchte, wie man sie auf der Insel liebt, und dazu das, was die Saison gerade hergibt.
+					</p>
+					<p data-zeigen style="--v: 0.2s">
+						Eine feste Speisekarte gibt es nicht. Wir schreiben sie jede Woche neu, deshalb finden Sie sie
+						bei uns am Tisch und nicht hier.
+					</p>
+					<a class="knopf" href={reservieren} data-zeigen style="--v: 0.3s">Tisch reservieren</a>
+				</div>
+				<div class="kueche__bilder">
+					<figure class="bild bild--a" data-wisch data-tempo="-0.06">
+						<img src="/bilder/essen-schmor.webp" alt="Geschmortes Fleisch mit Kartoffeln auf Keramikteller" width="1400" height="781" loading="lazy" />
+					</figure>
+					<figure class="bild bild--b" data-wisch data-tempo="0.08">
+						<img src="/bilder/essen-pasta.webp" alt="Pasta mit Muscheln" width="1400" height="781" loading="lazy" />
+					</figure>
+					<figure class="bild bild--c" data-wisch data-tempo="-0.1">
+						<img src="/bilder/essen-fisch.webp" alt="Ganzer Fisch mit Zitrone auf blauem Teller" width="1400" height="781" loading="lazy" />
+					</figure>
+					<figure class="bild bild--d" data-wisch data-tempo="0.05">
+						<img src="/bilder/essen-muscheln.webp" alt="Miesmuscheln auf Salat" width="1400" height="781" loading="lazy" />
+					</figure>
+				</div>
+			</div>
+		</section>
+
+		<!-- Feste Tage -->
+		<section class="tage" id="tage">
+			<div class="wrap">
+				<div class="tage__kopf">
+					<h2 data-zeigen>Worauf man sich verlassen kann</h2>
+					<p data-zeigen style="--v: 0.1s">Die Karte wechselt, zwei Tage bleiben.</p>
+				</div>
+				<div class="tage__raster">
+					<article class="karte karte--bild" data-zeigen>
+						<img src="/bilder/haehnchen.webp" alt="Geschmortes Hähnchen in einer roten Keramikschale" width="1400" height="781" loading="lazy" />
+						<div class="karte__text">
+							<p class="karte__tag">Dienstag</p>
+							<h3>Hähnchentag</h3>
+						</div>
+					</article>
+					<article class="karte karte--oli" data-zeigen style="--v: 0.12s">
+						<p class="karte__gross" aria-hidden="true">BBQ</p>
+						<div class="karte__text">
+							<p class="karte__tag">Freitag oder Samstag</p>
+							<h3>BBQ-Tag</h3>
+							<p>Am Wochenende wird gegrillt. An welchem der beiden Tage, sagen wir Ihnen gern.</p>
+						</div>
+					</article>
+					<article class="karte karte--bild" data-zeigen style="--v: 0.24s">
+						<img src="/bilder/essen-ente.webp" alt="Aufgeschnittenes Fleisch mit Pilzen und Karotten" width="1400" height="781" loading="lazy" />
+						<div class="karte__text">
+							<p class="karte__tag">Jede Woche</p>
+							<h3>Neue Karte</h3>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- Haus und Garten: waagerechte Galerie, die beim Scrollen durchläuft -->
+		<section class="galerie" id="haus" data-galerie>
+			<div class="galerie__fest">
+				<div class="galerie__spur" data-spur>
+					<div class="galerie__auftakt">
+						<h2>Ein altes Haus, ein großer Garten</h2>
+						<p>
+							Drinnen hell und ruhig, draußen die überdachte Terrasse und der Garten mit Brunnen. Suchen
+							Sie sich Ihren Platz aus.
+						</p>
+						<p class="galerie__hinweis">Weiter scrollen</p>
+					</div>
+					{
+						galerie.map((g) => (
+							<figure class="galerie__bild" style={`--verh: ${g.b / g.h}`}>
+								<img src={g.src} alt={g.alt} width={g.b} height={g.h} loading="lazy" />
+								<figcaption>{g.text}</figcaption>
+							</figure>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- Geschichte -->
+		<section class="geschichte" id="geschichte" data-band>
+			<svg class="geschichte__band" viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+				<path
+					pathLength="1"
+					d="M-20 420 C 180 300, 300 520, 470 400 S 640 140, 760 260 S 700 470, 860 430 S 1120 180, 1300 300 S 1500 380, 1620 220"
+				></path>
+			</svg>
+			<div class="wrap geschichte__raster">
+				<div class="geschichte__glocke" data-glocke>
+					<Logo teil="glocke" />
+				</div>
+				<div>
+					<h2 data-zeigen>Woher der Name kommt</h2>
+					<p data-zeigen style="--v: 0.1s">
+						Ein Picarol ist die Glocke, die Kühe und Schafe auf Mallorca um den Hals tragen. In unserem
+						Haus in Búger wurden diese Messingglocken früher hergestellt.
+					</p>
+					<p data-zeigen style="--v: 0.2s">
+						Die Werkstatt gibt es nicht mehr, das Haus und sein Name sind geblieben. Auf manchem Tisch
+						steht bis heute ein Picarol.
+					</p>
+				</div>
+				<figure class="bild geschichte__bild" data-wisch>
+					<img src="/bilder/tatar.webp" alt="Vorspeise auf Keramikteller, daneben ein Picarol aus Messing" width="1400" height="781" loading="lazy" />
+				</figure>
+			</div>
+		</section>
+
+		<!-- Besuch -->
+		<section class="besuch" id="besuch" data-besuch>
+			<div class="besuch__bild">
+				<img src="/bilder/garten-abend.webp" alt="" width="2200" height="1228" loading="lazy" />
+			</div>
+			<div class="wrap">
+				<div class="besuch__karte" data-zeigen>
+					<h2>Kommen Sie vorbei</h2>
+					<p>Am besten mit Reservierung, vor allem am Hähnchentag und zum BBQ.</p>
+					<dl>
+						<div>
+							<dt>Adresse</dt>
+							<dd>
+								{kontakt.adresse || 'Búger, Mallorca'}
+								{!kontakt.adresse && <span class="offen"> (genaue Adresse wird ergänzt)</span>}
+							</dd>
+						</div>
+						<div>
+							<dt>Telefon</dt>
+							<dd>
+								{
+									kontakt.telefon ? (
+										<a href={telLink}>{kontakt.telefon}</a>
+									) : (
+										<span class="offen">wird ergänzt</span>
+									)
+								}
+							</dd>
+						</div>
+						{
+							kontakt.email && (
+								<div>
+									<dt>E-Mail</dt>
+									<dd>
+										<a href={`mailto:${kontakt.email}`}>{kontakt.email}</a>
+									</dd>
+								</div>
+							)
+						}
+						<div>
+							<dt>Geöffnet</dt>
+							<dd>{kontakt.oeffnungszeiten || <span class="offen">Zeiten werden ergänzt</span>}</dd>
+						</div>
+					</dl>
+					{telLink && <a class="knopf" href={telLink}>Anrufen und reservieren</a>}
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="fuss">
+		<div class="wrap fuss__innen">
+			<Logo class="fuss__logo" label="El Picarol Bar Restaurant" />
+			<p>Búger, Mallorca</p>
+		</div>
+	</footer>
+
+	<script>
+		const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const breit = window.matchMedia('(min-width: 56.01rem)');
+
+		// 1. Einblenden, sobald etwas ins Bild kommt
+		const sichtbar = new IntersectionObserver(
+			(eintraege) => {
+				for (const e of eintraege) {
+					if (e.isIntersecting) {
+						e.target.classList.add('ist-da');
+						sichtbar.unobserve(e.target);
+					}
+				}
+			},
+			{ rootMargin: '0px 0px -12% 0px', threshold: 0.12 },
+		);
+		document.querySelectorAll('[data-zeigen], [data-wisch]').forEach((el) => sichtbar.observe(el));
+
+		// 2. Alles, was vom Scrollstand abhängt
+		const kopf = document.querySelector<HTMLElement>('[data-kopf]');
+		const auftakt = document.querySelector<HTMLElement>('[data-auftakt]');
+		const galerie = document.querySelector<HTMLElement>('[data-galerie]');
+		const spur = document.querySelector<HTMLElement>('[data-spur]');
+		const glocke = document.querySelector<HTMLElement>('[data-glocke]');
+		const besuch = document.querySelector<HTMLElement>('[data-besuch]');
+		const band = document.querySelector<HTMLElement>('[data-band]');
+		const schwebend = [...document.querySelectorAll<HTMLElement>('[data-tempo]')];
+
+		let weg = 0;
+
+		function messen() {
+			if (!galerie || !spur) return;
+			const pinnen = breit.matches && !ruhig.matches;
+			galerie.classList.toggle('galerie--fest', pinnen);
+			if (pinnen) {
+				weg = Math.max(0, spur.scrollWidth - window.innerWidth);
+				galerie.style.height = `${window.innerHeight + weg}px`;
+			} else {
+				weg = 0;
+				galerie.style.height = '';
+				spur.style.transform = '';
+			}
+		}
+
+		function zeichnen() {
+			const y = window.scrollY;
+			const vh = window.innerHeight;
+
+			kopf?.classList.toggle('kopf--fest', y > vh * 0.6);
+
+			if (ruhig.matches) return;
+
+			if (auftakt && y < vh * 1.2) {
+				auftakt.style.setProperty('--s', String(Math.min(1, y / vh)));
+			}
+
+			if (galerie && spur && weg > 0) {
+				const oben = galerie.getBoundingClientRect().top;
+				const anteil = Math.min(1, Math.max(0, -oben / weg));
+				spur.style.transform = `translate3d(${-anteil * weg}px, 0, 0)`;
+			}
+
+			for (const el of breit.matches ? schwebend : []) {
+				const r = el.getBoundingClientRect();
+				if (r.bottom < -200 || r.top > vh + 200) continue;
+				const mitte = r.top + r.height / 2 - vh / 2;
+				el.style.setProperty('--y', `${mitte * Number(el.dataset.tempo)}px`);
+			}
+
+			if (glocke) {
+				const r = glocke.getBoundingClientRect();
+				if (r.bottom > 0 && r.top < vh) {
+					const mitte = (r.top + r.height / 2 - vh / 2) / vh;
+					glocke.style.setProperty('--dreh', `${Math.sin(mitte * 6) * 9}deg`);
+				}
+			}
+
+			if (band) {
+				const r = band.getBoundingClientRect();
+				if (r.bottom > 0 && r.top < vh) {
+					const anteil = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.9 + r.height * 0.4)));
+					band.style.setProperty('--zug', String(1 - anteil));
+				}
+			}
+
+			if (besuch) {
+				const r = besuch.getBoundingClientRect();
+				if (r.bottom > 0 && r.top < vh) {
+					besuch.style.setProperty('--p', String((r.top / vh) * -8));
+				}
+			}
+		}
+
+		let wartet = false;
+		function anstossen() {
+			if (wartet) return;
+			wartet = true;
+			requestAnimationFrame(() => {
+				zeichnen();
+				wartet = false;
+			});
+		}
+
+		window.addEventListener('scroll', anstossen, { passive: true });
+		window.addEventListener('resize', () => {
+			messen();
+			anstossen();
+		});
+		window.addEventListener('load', () => {
+			messen();
+			anstossen();
+		});
+		messen();
+		zeichnen();
+	</script>
 </Layout>

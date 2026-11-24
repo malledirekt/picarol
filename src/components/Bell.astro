@@ -1,0 +1,18 @@
+---
+// Der Picarol: kantige Blechglocke mit Bügel, wie sie früher im Haus gefertigt wurde.
+interface Props {
+	class?: string;
+	filled?: boolean;
+}
+const { class: className, filled = false } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 64 84" aria-hidden="true" focusable="false">
+	<g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+		<path d="M25 16v-5a7 7 0 0 1 14 0v5"></path>
+		<path d="M21 16h22l10 44H11z" fill={filled ? 'var(--messing)' : 'none'}></path>
+		<path d="M14.5 50h35"></path>
+		<path d="M32 60v9"></path>
+	</g>
+	<circle cx="32" cy="73" r="3.5" fill="currentColor"></circle>
+</svg>

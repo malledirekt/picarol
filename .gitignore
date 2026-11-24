@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Originaldateien (zu groß fürs Repo, bleiben nur lokal)
+bilder picarol/
+logo/

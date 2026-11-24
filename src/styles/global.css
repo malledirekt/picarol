@@ -944,36 +944,27 @@ a {
 
 /* ---------- Besuch ---------- */
 .besuch {
-	--p: 0;
-	position: relative;
-	overflow: hidden;
-	padding-block: clamp(4rem, 12vw, 9rem);
-	background: var(--carbo);
-}
-
-.besuch__bild {
-	position: absolute;
-	inset: -10% 0;
-	transform: translate3d(0, calc(var(--p) * 1%), 0);
-	will-change: transform;
-}
-
-.besuch__bild img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.besuch .wrap {
-	position: relative;
-	display: flex;
-	justify-content: flex-end;
+	padding-block: clamp(4.5rem, 10vw, 8.5rem);
+	background: var(--leinen);
 }
 
 .besuch__karte {
-	width: min(100%, 33rem);
-	background: var(--crema);
-	padding: clamp(1.75rem, 4vw, 3.25rem);
+	display: grid;
+	grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+	column-gap: clamp(2rem, 7vw, 7rem);
+	align-content: start;
+}
+
+.besuch__karte > h2,
+.besuch__karte > p,
+.besuch__karte > .knopf {
+	grid-column: 1;
+	justify-self: start;
+}
+
+.besuch__karte > dl {
+	grid-column: 2;
+	grid-row: 1 / span 4;
 }
 
 .besuch__karte h2 {
@@ -985,8 +976,7 @@ a {
 }
 
 .besuch dl {
-	margin-top: 2rem;
-	border-top: 1px solid var(--sand);
+	border-top: 1px solid color-mix(in srgb, var(--bronze) 40%, transparent);
 }
 
 .besuch dl > div {
@@ -995,7 +985,7 @@ a {
 	gap: 1rem;
 	align-items: baseline;
 	padding-block: 1rem;
-	border-bottom: 1px solid var(--sand);
+	border-bottom: 1px solid color-mix(in srgb, var(--bronze) 40%, transparent);
 }
 
 .besuch dt {
@@ -1123,8 +1113,14 @@ a {
 		font-size: 34vw;
 	}
 
-	.besuch .wrap {
-		justify-content: center;
+	.besuch__karte {
+		grid-template-columns: 1fr;
+	}
+
+	.besuch__karte > dl {
+		grid-column: 1;
+		grid-row: auto;
+		margin-top: 2rem;
 	}
 }
 

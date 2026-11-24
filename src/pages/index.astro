@@ -23,6 +23,19 @@ const galerie = [
 	{ src: '/bilder/terrasse-abend.webp', alt: 'Gäste beim Abendessen auf der Terrasse unter Korblampen', b: 1100, h: 1366, text: 'Wenn es dunkel wird' },
 	{ src: '/bilder/garten-abend.webp', alt: 'Das beleuchtete Haus mit Garten am Abend', b: 2200, h: 1228, text: 'Der Garten am Abend' },
 ];
+const stiche = [
+	{ bild: 'rind', titel: 'Fleisch vom Grill', b: 580, h: 356 },
+	{ bild: 'artischocke', titel: 'Gemüse der Saison', b: 386, h: 320 },
+	{ bild: 'kraut', titel: 'Kräuter der Insel', b: 386, h: 272 },
+	{ bild: 'rebe', titel: 'Ein Glas dazu', b: 506, h: 356 },
+];
+
+const details = [
+	{ bild: 'serviette', alt: 'Leinenserviette mit El-Picarol-Logo und Kräuterzweig' },
+	{ bild: 'korken', alt: 'Weinkorken mit El-Picarol-Logo' },
+	{ bild: 'teller', alt: 'Keramikteller mit El-Picarol-Logo' },
+	{ bild: 'glas', alt: 'Glas mit Eis und El-Picarol-Logo' },
+];
 ---
 
 <Layout
@@ -124,6 +137,20 @@ const galerie = [
 			</div>
 		</section>
 
+		<!-- Vier Stiche aus der Brand Identity -->
+		<section class="stiche" aria-label="Was bei uns auf den Tisch kommt">
+			<div class="wrap stiche__raster">
+				{
+					stiche.map((k, i) => (
+						<article class="stichkarte" data-zeigen style={`--v: ${i * 0.1}s`}>
+							<h3>{k.titel}</h3>
+							<img src={`/bilder/stich-${k.bild}.webp`} alt="" width={k.b} height={k.h} loading="lazy" />
+						</article>
+					))
+				}
+			</div>
+		</section>
+
 		<!-- Feste Tage -->
 		<section class="tage" id="tage">
 			<div class="wrap">
@@ -155,6 +182,19 @@ const galerie = [
 						</div>
 					</article>
 				</div>
+			</div>
+		</section>
+
+		<!-- Großes Bild mit drei Worten -->
+		<section class="drei" data-drei aria-label="Küche, Garten, Zeit">
+			<div class="drei__bild">
+				<img src="/bilder/essen-nah.webp" alt="Geschmortes Fleisch mit Rosmarin auf einem Keramikteller" width="2200" height="1228" loading="lazy" />
+			</div>
+			<div class="drei__text" data-zeigen>
+				<p><span>Küche</span></p>
+				<p><span>Garten</span></p>
+				<p><span>Zeit</span></p>
+				<Logo teil="glocke" />
 			</div>
 		</section>
 
@@ -209,6 +249,17 @@ const galerie = [
 					<img src="/bilder/tatar.webp" alt="Vorspeise auf Keramikteller, daneben ein Picarol aus Messing" width="1400" height="781" loading="lazy" />
 				</figure>
 			</div>
+		</section>
+
+		<!-- Details -->
+		<section class="details" aria-label="Details aus dem El Picarol">
+			{
+				details.map((d, i) => (
+					<figure data-zeigen style={`--v: ${i * 0.1}s`}>
+						<img src={`/bilder/marke-${d.bild}.webp`} alt={d.alt} width="640" height="640" loading="lazy" />
+					</figure>
+				))
+			}
 		</section>
 
 		<!-- Besuch -->
@@ -294,6 +345,7 @@ const galerie = [
 		const glocke = document.querySelector<HTMLElement>('[data-glocke]');
 		const besuch = document.querySelector<HTMLElement>('[data-besuch]');
 		const band = document.querySelector<HTMLElement>('[data-band]');
+		const drei = document.querySelector<HTMLElement>('[data-drei]');
 		const schwebend = [...document.querySelectorAll<HTMLElement>('[data-tempo]')];
 
 		let weg = 0;
@@ -342,6 +394,13 @@ const galerie = [
 				if (r.bottom > 0 && r.top < vh) {
 					const mitte = (r.top + r.height / 2 - vh / 2) / vh;
 					glocke.style.setProperty('--dreh', `${Math.sin(mitte * 6) * 9}deg`);
+				}
+			}
+
+			if (drei) {
+				const r = drei.getBoundingClientRect();
+				if (r.bottom > 0 && r.top < vh) {
+					drei.style.setProperty('--p', String((r.top / vh) * -9));
 				}
 			}
 

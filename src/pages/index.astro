@@ -14,8 +14,6 @@ const kontakt = {
 const telLink = kontakt.telefon ? `tel:${kontakt.telefon.replace(/[^+\d]/g, '')}` : '';
 const reservieren = telLink || '#besuch';
 
-const laufband = ['Dienstag ist Hähnchentag', 'Freitag oder Samstag BBQ', 'Jede Woche eine neue Karte', 'Deutsch und mallorquinisch'];
-
 const galerie = [
 	{ src: '/bilder/garten-tag.webp', alt: 'Tische im Garten vor dem Haus, in der Mitte ein Brunnen', b: 1800, h: 1005, text: 'Der Garten am Mittag' },
 	{ src: '/bilder/terrasse-mittag.webp', alt: 'Gedeckter Tisch auf der überdachten Terrasse mit Blick auf Palmen', b: 1100, h: 1366, text: 'Die Terrasse' },
@@ -27,7 +25,7 @@ const stiche = [
 	{ bild: 'rind', titel: 'Fleisch vom Grill', b: 580, h: 356 },
 	{ bild: 'artischocke', titel: 'Gemüse der Saison', b: 386, h: 320 },
 	{ bild: 'kraut', titel: 'Kräuter der Insel', b: 386, h: 272 },
-	{ bild: 'rebe', titel: 'Ein Glas dazu', b: 506, h: 356 },
+	{ bild: 'rebe', titel: 'Ein Glas Wein dazu', b: 506, h: 356 },
 ];
 
 const details = [
@@ -75,8 +73,8 @@ const details = [
 			<div class="auftakt__text">
 				<p class="auftakt__ort">Bar Restaurant in Búger, Mallorca</p>
 				<h1>
-					<span class="zeile"><span>Gut essen</span></span>
-					<span class="zeile"><span>Lange bleiben</span></span>
+					<span class="zeile"><span>Gut essen,</span></span>
+					<span class="zeile"><span>gerne verweilen</span></span>
 				</h1>
 				<p class="auftakt__lead">
 					Deutsche und mallorquinische Küche in einem traditionellen Haus mit Garten. Die Karte wechselt
@@ -89,27 +87,11 @@ const details = [
 			</div>
 		</section>
 
-		<!-- Laufband -->
-		<div class="laufband" aria-hidden="true">
-			<div class="laufband__spur">
-				{
-					[0, 1, 2].map(() =>
-						laufband.map((t) => (
-							<span>
-								{t}
-								<Logo teil="glocke" />
-							</span>
-						)),
-					)
-				}
-			</div>
-		</div>
-
 		<!-- Küche -->
 		<section class="kueche" id="kueche">
 			<div class="wrap kueche__raster">
 				<div class="kueche__text">
-					<h2 data-zeigen>Zwei Küchen an einem Tisch</h2>
+					<h2 data-zeigen>Zwei Welten, vereint an einem Tisch</h2>
 					<p data-zeigen style="--v: 0.1s">
 						Bei uns steht deutsche Küche neben mallorquinischer. Geschmortes, das Zeit hatte, Fisch und
 						Meeresfrüchte, wie man sie auf der Insel liebt, und dazu das, was die Saison gerade hergibt.
@@ -132,6 +114,9 @@ const details = [
 					</figure>
 					<figure class="bild bild--d" data-wisch data-tempo="0.05">
 						<img src="/bilder/essen-muscheln.webp" alt="Miesmuscheln auf Salat" width="1400" height="781" loading="lazy" />
+					</figure>
+					<figure class="bild bild--e" data-wisch data-tempo="-0.07">
+						<img src="/bilder/tatar.webp" alt="Vorspeise in Salatblättern auf einem Keramikteller" width="1400" height="781" loading="lazy" />
 					</figure>
 				</div>
 			</div>
@@ -203,7 +188,7 @@ const details = [
 			<div class="galerie__fest">
 				<div class="galerie__spur" data-spur>
 					<div class="galerie__auftakt">
-						<h2>Ein altes Haus, ein großer Garten</h2>
+						<h2>Tradition, neu belebt</h2>
 						<p>
 							Drinnen hell und ruhig, draußen die überdachte Terrasse und der Garten mit Brunnen. Suchen
 							Sie sich Ihren Platz aus.
@@ -235,7 +220,7 @@ const details = [
 					<Logo teil="glocke" />
 				</div>
 				<div>
-					<h2 data-zeigen>Woher der Name kommt</h2>
+					<h2 data-zeigen>Geschichte</h2>
 					<p data-zeigen style="--v: 0.1s">
 						Ein Picarol ist die Glocke, die Kühe und Schafe auf Mallorca um den Hals tragen. In unserem
 						Haus in Búger wurden diese Messingglocken früher hergestellt.
@@ -246,7 +231,7 @@ const details = [
 					</p>
 				</div>
 				<figure class="bild geschichte__bild" data-wisch>
-					<img src="/bilder/tatar.webp" alt="Vorspeise auf Keramikteller, daneben ein Picarol aus Messing" width="1400" height="781" loading="lazy" />
+					<img src="/bilder/haus.webp" alt="Das Haus von El Picarol in der Abenddämmerung, davor der Brunnen im Garten" width="1800" height="1005" loading="lazy" />
 				</figure>
 			</div>
 		</section>

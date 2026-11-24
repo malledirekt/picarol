@@ -300,6 +300,7 @@ a {
 	position: absolute;
 	inset: 0;
 	background:
+		linear-gradient(rgba(30, 26, 20, 0.3), rgba(30, 26, 20, 0.3)),
 		linear-gradient(180deg, rgba(30, 26, 20, 0.55) 0%, rgba(30, 26, 20, 0) 26%),
 		linear-gradient(75deg, rgba(30, 26, 20, 0.82) 0%, rgba(30, 26, 20, 0.45) 38%, rgba(30, 26, 20, 0) 68%);
 }
@@ -384,42 +385,6 @@ a {
 	gap: 1.25rem 2.25rem;
 	margin-top: 2.25rem;
 	animation: hoch 1s var(--weich) 1.2s both;
-}
-
-/* ---------- Laufband ---------- */
-.laufband {
-	background: var(--bronze);
-	color: var(--crema);
-	overflow: hidden;
-	padding-block: 1.05rem;
-}
-
-.laufband__spur {
-	display: flex;
-	width: max-content;
-	animation: laufen 48s linear infinite;
-}
-
-.laufband span {
-	display: inline-flex;
-	align-items: center;
-	font-family: var(--display);
-	font-style: italic;
-	font-size: clamp(1.35rem, 2.2vw, 1.9rem);
-	white-space: nowrap;
-}
-
-.laufband svg {
-	width: 1.05rem;
-	margin-inline: 2.2rem;
-	fill: currentColor;
-	opacity: 0.85;
-}
-
-@keyframes laufen {
-	to {
-		transform: translateX(-33.3333%);
-	}
 }
 
 /* ---------- Einblenden beim Scrollen ---------- */
@@ -516,6 +481,12 @@ a {
 .bild--d {
 	grid-column: 3 / 13;
 	aspect-ratio: 16 / 9;
+}
+
+.bild--e {
+	grid-column: 1 / 9;
+	aspect-ratio: 4 / 3;
+	margin-top: -8%;
 }
 
 /* ---------- Stiche: vier Karten wie in der Brand Identity ---------- */
@@ -1082,6 +1053,7 @@ a {
 
 	.auftakt__bild::after {
 		background:
+			linear-gradient(rgba(30, 26, 20, 0.3), rgba(30, 26, 20, 0.3)),
 			linear-gradient(180deg, rgba(30, 26, 20, 0.6) 0%, rgba(30, 26, 20, 0) 24%),
 			linear-gradient(0deg, rgba(30, 26, 20, 0.9) 0%, rgba(30, 26, 20, 0.5) 45%, rgba(30, 26, 20, 0) 75%);
 	}
@@ -1113,7 +1085,8 @@ a {
 	}
 
 	.bild--a,
-	.bild--c {
+	.bild--c,
+	.bild--e {
 		grid-column: 1 / 12;
 		aspect-ratio: 16 / 10;
 		margin-top: 0;
